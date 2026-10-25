@@ -21,6 +21,7 @@ External Attack Surface Mapping Module with the central dashboard. It maps and v
 | **Email** | Amazon SES (SMTP/STARTTLS) with DKIM validation. |
 
 ### Architecture
+![EASM Architecture Diagram](images/EASM_Architecture_v2.png)
 *   **Dual DB Architecture:**
     *   **Main Engine:** Handles auth, onboarding, darkweb, ransomware, DDoS targets, Nmap results, notifications, and VIP/TTR.
     *   **Passive Engine:** Houses dynamic per-scan tables, current materialized EASM surfaces, and validation/quarantine tables. Defaults to the main Postgres URL unless `PASSIVE_CONNECTORS_DATABASE_URL` is explicitly overridden.
@@ -141,6 +142,9 @@ Collect all leaked information from Telegram channels (stealer logs, credential 
 | **Containers** | Docker Compose (3 services: backend, frontend, postgres) |
 | **Security/Scanning** | yara-python |
 
+### Architecture
+![EASM Architecture Diagram](images/Infostealer_Architecture_v1.png)
+
 ### What Exists - Production Readiness
 | Feature | Status | Score | Notes |
 | :--- | :--- | :--- | :--- |
@@ -208,6 +212,13 @@ The old broad "missing endpoints" framing is no longer accurate for this module.
 
 ### Purpose
 Dark web forums regularly post data breach findings - selling or sharing leaked data. Posts sometimes name the specific organization, sometimes only describe a category (e.g., "Israeli fintech company"). This module's goal is to automatically discover and collect all breach-related posts from these forums, store them in a database, and integrate with the Nightware platform to match findings to monitored organizations.
+
+### Architecture
+            Dark Web Forum Monitoring
+![EASM Architecture Diagram](images/DarkWebForumMonitoring_v1.png)
+
+            Dark Web Forum Scraping
+![EASM Architecture Diagram](images/DarkWebForumScraping_v1.png)
 
 ### AI Agent Mode
 The system is built on a multi-agent architecture, where each agent has a focused role:
