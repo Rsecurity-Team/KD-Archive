@@ -282,7 +282,7 @@ The current code stores reusable scraper state in the database. Instead of a sta
 
 | Where | Old Text | Current Text | Date of change |
 | :--- | :--- | :--- | :--- |
-| **EASM Technologies** | Backend |  Added - Redis 5+, Playwright, Telethon, STIX2, PYOTP. | 11/10/26 |
+| **EASM Technologies** Backend | - | Added - Redis 5+, Playwright, Telethon, STIX2, PYOTP. | 11/10/26 |
 | **EASM Technologies** | Workers - Standalone orchestrator, Redis queues per scan type, dedicated workers for Shodan, CRT.sh, Nmap, DNSTwist, Sherlock, ransomware, mobile apps, cloud exposure, Frogy, DDoS ingestion, plus Postgres-backed DDoS sector enrichment | Changed to - Standalone orchestrator + 20+ Redis-backed workers (EASM scanners, ETL pipelines, social media/Telegram scrapers, Threat Intel, Alerting). | 11/10/26 |
 | **EASM Technologies** | Frontend - Next.js 15, React 19, TypeScript, Tailwind CSS 4, ECharts | Added Vitest. | 11/10/26 |
 | **EASM Technologies** | OSINT | Removed - DDoSia, ransomware feeds. | 11/10/26 |
