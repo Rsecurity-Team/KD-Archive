@@ -15,7 +15,7 @@ External Attack Surface Mapping Module with the central dashboard. It maps and v
 | Layer | Stack |
 | :--- | :--- |
 | **Backend Workers** | Python 3.11, FastAPI, SQLAlchemy 2.0, PostgreSQL 16, Redis 5+, Playwright, Telethon, STIX2, PYOTP. Standalone orchestrator + 20+ Redis-backed workers (EASM scanners, ETL pipelines, social media/Telegram scrapers, Threat Intel, Alerting). |
-| **Frontend** | Next.js 15, React 2026, TypeScript 5, Tailwind CSS 4, ECharts (2D/3D), Vitest. |
+| **Frontend** | Next.js 15, React 19, TypeScript 5, Tailwind CSS 4, ECharts (2D/3D), Vitest. |
 | **OSINT** | Shodan, Nmap, DNSTwist, Sherlock, Frogy, crt.sh, google-play-scraper. |
 | **CVE Data** | NVD API v2.0, CISA KEV, Exploit-DB, ThreatFox, MISP, OTX. |
 | **Email** | Amazon SES (SMTP/STARTTLS) with DKIM validation. |
