@@ -15,7 +15,7 @@ External Attack Surface Mapping Module with the central dashboard. It maps and v
 | Layer | Stack |
 | :--- | :--- |
 | **Backend Workers** | Python 3.11, FastAPI, SQLAlchemy 2.0, PostgreSQL 16, Redis 5+, Playwright, Telethon, STIX2, PYOTP. Standalone orchestrator + 20+ Redis-backed workers (EASM scanners, ETL pipelines, social media/Telegram scrapers, Threat Intel, Alerting). |
-| **Frontend** | Next.js 15, React 19, TypeScript 5, Tailwind CSS 4, ECharts (2D/3D), Vitest. |
+| **Frontend** | Next.js 15, React 2026, TypeScript 5, Tailwind CSS 4, ECharts (2D/3D), Vitest. |
 | **OSINT** | Shodan, Nmap, DNSTwist, Sherlock, Frogy, crt.sh, google-play-scraper. |
 | **CVE Data** | NVD API v2.0, CISA KEV, Exploit-DB, ThreatFox, MISP, OTX. |
 | **Email** | Amazon SES (SMTP/STARTTLS) with DKIM validation. |
@@ -54,7 +54,7 @@ External Attack Surface Mapping Module with the central dashboard. It maps and v
 
 ### Current EASM data flow
 1.  **Multi-Threaded Orchestration:** `RUN_MODE=orchestrator` utilizes three distinct schedulers (EASM, Social Media, Org Bootstrap) to load targets and publish Redis jobs by scan type.
-2.  **Task Consumption:** `RUN_MODE=worker` instances consume `{scan_type}:jobs` from Redis, executing their specific sync handlers (e.g., `run_social_media_collection_for_org`). Upon completion, they publish status to `{scan_type}:result:{job_id}` and `{scan_type}:results`. Specialized background workers (e.g., `nvd_etl_worker`, `stealer_log_poller_worker`) bypass Redis and execute their own continuous polling loops.
+2.  **Task Consumption:** `RUN_MODE=worker` instances consume `{scan_type}:jobs` from Redis, executing their specific sync handlers (e.g., `run_social_media_collection_for_org`). Upon completion, they publish status to `{scan_type}:result:{job_id}` and `{scan_type}:results. Specialized background workers (e.g., `nvd_etl_worker`, `stealer_log_poller_worker`) bypass Redis and execute their own continuous polling loops.
 3.  **Passive Ingestion & Enrichment:** Connectors write raw source rows and derived surfaces to the `passive_engine`.
     *   Shodan & Frogy populate multiple EASM surfaces.
     *   CRT.sh feeds digital_certificates.
@@ -327,3 +327,4 @@ The current code stores reusable scraper state in the database. Instead of a sta
 | **Forums Scraper - AI Agent Mode table** | EASM Reporting API - Serves /internal/easm/dark-web-forums/* dashboard reporting endpoints | Changed to - Publishes a rolling 30-day JSON snapshot to a Redis key (forum_reporting:summary) for the dashboard to consume. | 17/10/26 |
 | **Forums Scraper - Current Limitations** | EASM reporting freshness depends on completed scraper/agent/feed-ingestion runs. Snapshot tables exist, but the current scraper/ingestion code does not populate them; reporting functions fall back to live Forum Post queries when snapshots are empty. | Changed to - EASM reporting freshness depends on completed scraper/agent/feed-ingestion runs. Snapshot tables exist, but the current scraper/ingestion code does not populate them; reporting payloads will be empty until snapshot generation is fixed. | 17/10/26 |
 | **Forums Scraper - Classification and relevance** | correlation_service.py contains mock EASM assets and keyword/category checks; global threat categories currently return an empty list until a real classifier/category field is wired. Direct org name matching Category + geography matching (e.g., “fintech” + “Israel” → could be our client) , Confidence scoring for fuzzy matches , Save relevant / skip irrelevant | Changed to basic filtering (checking for critical categories and valid victim domains within the last 48 hours) is handled by forum_ingest_mapper.py. It does not contain any EASM asset matching logic; it blindly publishes indicators (IOCs) to the event bus and relies entirely on the downstream Nightware EASM module to figure out if the victim matches a client. | 17/10/26 |
+| EASM Technologies Backend | React 19 | React 2026 | 27/10/26 |
