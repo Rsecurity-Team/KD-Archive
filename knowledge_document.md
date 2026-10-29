@@ -14,7 +14,7 @@ External Attack Surface Mapping Module with the central dashboard. It maps and v
 ### Technologies
 | Layer | Stack |
 | :--- | :--- |
-| **Backend Workers** | Python 3.11, FastAPI, SQLAlchemy 2.0, PostgreSQL 16, Redis 5+, Playwright, Telethon, STIX2, PYOTP, MongoDB. Standalone orchestrator + 20+ Redis-backed workers (EASM scanners, ETL pipelines, social media/Telegram scrapers, Threat Intel, Alerting). |
+| **Backend Workers** | Python 3.11, FastAPI, SQLAlchemy 2.0, PostgreSQL 16, Redis 5+, Playwright, Telethon, STIX2, PYOTP. Standalone orchestrator + 20+ Redis-backed workers (EASM scanners, ETL pipelines, social media/Telegram scrapers, Threat Intel, Alerting). |
 | **Frontend** | Next.js 15, React 19, TypeScript 5, Tailwind CSS 4, ECharts (2D/3D), Vitest. |
 | **OSINT** | Shodan, Nmap, DNSTwist, Sherlock, Frogy, crt.sh, google-play-scraper. |
 | **CVE Data** | NVD API v2.0, CISA KEV, Exploit-DB, ThreatFox, MISP, OTX. |
@@ -328,4 +328,3 @@ The current code stores reusable scraper state in the database. Instead of a sta
 | **Forums Scraper - Current Limitations** | EASM reporting freshness depends on completed scraper/agent/feed-ingestion runs. Snapshot tables exist, but the current scraper/ingestion code does not populate them; reporting functions fall back to live Forum Post queries when snapshots are empty. | Changed to - EASM reporting freshness depends on completed scraper/agent/feed-ingestion runs. Snapshot tables exist, but the current scraper/ingestion code does not populate them; reporting payloads will be empty until snapshot generation is fixed. | 17/10/26 |
 | **Forums Scraper - Classification and relevance** | correlation_service.py contains mock EASM assets and keyword/category checks; global threat categories currently return an empty list until a real classifier/category field is wired. Direct org name matching Category + geography matching (e.g., “fintech” + “Israel” → could be our client) , Confidence scoring for fuzzy matches , Save relevant / skip irrelevant | Changed to basic filtering (checking for critical categories and valid victim domains within the last 48 hours) is handled by forum_ingest_mapper.py. It does not contain any EASM asset matching logic; it blindly publishes indicators (IOCs) to the event bus and relies entirely on the downstream Nightware EASM module to figure out if the victim matches a client. | 17/10/26 |
 | EASM Technologies Backend | React 19 | React 2026 | 27/10/26 |
-| EASM Technologies Backend | - | Added - MongoDB. | 28/10/26 |
